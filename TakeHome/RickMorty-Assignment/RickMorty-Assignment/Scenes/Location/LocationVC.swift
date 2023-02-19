@@ -44,8 +44,8 @@ final class LocationVC: BaseVC {
         setupTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         viewModel.getLocations()
     }
     
@@ -59,12 +59,15 @@ final class LocationVC: BaseVC {
             cell.setContents(item)
             return cell
         }
-        
     }
     
     override func setupBindings() {
         viewModel.$locations.receive(on: DispatchQueue.main).sink { [unowned self] value in
             self.setupSnapshot(value)
+        }.store(in: &disposables)
+        
+        viewModel.$errorState.receive(on: DispatchQueue.main).sink { value in
+            print("is error nil \(value == nil)")
         }.store(in: &disposables)
     }
     
@@ -74,7 +77,6 @@ final class LocationVC: BaseVC {
         snapshot.appendItems(value, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-
 }
 
 extension LocationVC: UITableViewDelegate {
@@ -84,5 +86,11 @@ extension LocationVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if viewModel.locations.count == indexPath.row + 2 {
+            viewModel.getLocations()
+        }
     }
 }

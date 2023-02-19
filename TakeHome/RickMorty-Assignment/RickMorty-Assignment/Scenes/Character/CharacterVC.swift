@@ -45,8 +45,8 @@ final class CharacterVC: BaseVC {
         setupCollectionView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         viewModel.getCharacters()
     }
     
@@ -94,5 +94,11 @@ extension CharacterVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.characters.count == indexPath.row + 1 {
+            viewModel.getCharacters()
+        }
     }
 }

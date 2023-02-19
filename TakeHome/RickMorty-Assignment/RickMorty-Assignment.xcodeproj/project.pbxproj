@@ -36,6 +36,7 @@
 		AB89F424299FCFBE00E32046 /* EpisodesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89F423299FCFBE00E32046 /* EpisodesVM.swift */; };
 		AB89F426299FD3CE00E32046 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89F425299FD3CE00E32046 /* ImageAsset.swift */; };
 		AB89F428299FD5CC00E32046 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89F427299FD5CC00E32046 /* UIImage+Extension.swift */; };
+		AB9E378329A25280001D44DF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E378229A25280001D44DF /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		AB89F423299FCFBE00E32046 /* EpisodesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesVM.swift; sourceTree = "<group>"; };
 		AB89F425299FD3CE00E32046 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		AB89F427299FD5CC00E32046 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		AB9E378229A25280001D44DF /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				AB780CD429A1D45200487D1A /* UIView+Extension.swift */,
 				AB780CD629A1D82700487D1A /* UIStackView+Extension.swift */,
 				AB780CDA29A1EC9B00487D1A /* UIColor+Extension.swift */,
+				AB9E378229A25280001D44DF /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				AB780CD929A1DC0F00487D1A /* ModelEnums.swift in Sources */,
 				AB89F422299FCFB400E32046 /* EpisodesVC.swift in Sources */,
 				AB89F3EA299FA88D00E32046 /* AppDelegate.swift in Sources */,
+				AB9E378329A25280001D44DF /* String+Extension.swift in Sources */,
 				AB89F41E299FC59000E32046 /* APIResponse.swift in Sources */,
 				AB89F41C299FC57B00E32046 /* Location.swift in Sources */,
 				AB780CDB29A1EC9B00487D1A /* UIColor+Extension.swift in Sources */,

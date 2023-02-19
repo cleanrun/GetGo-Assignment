@@ -45,8 +45,8 @@ final class EpisodesVC: ViewController {
         setupTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         viewModel.getEpisodes()
     }
     
@@ -60,7 +60,6 @@ final class EpisodesVC: ViewController {
             cell.setContents(item)
             return cell
         }
-        
     }
     
     override func setupBindings() {
@@ -85,5 +84,11 @@ extension EpisodesVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if viewModel.episodes.count == indexPath.row + 1 {
+            viewModel.getEpisodes()
+        }
     }
 }
