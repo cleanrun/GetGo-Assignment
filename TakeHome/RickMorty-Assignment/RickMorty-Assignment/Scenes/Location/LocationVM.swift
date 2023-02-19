@@ -1,32 +1,32 @@
 //
-//  EpisodesVM.swift
+//  LocationVM.swift
 //  RickMorty-Assignment
 //
-//  Created by cleanmac on 17/02/23.
+//  Created by cleanmac on 19/02/23.
 //
 
 import Foundation
 import Combine
 
-final class EpisodesVM: ViewModel {
+final class LocationVM: ViewModel {
     @Dependency(\.webservice) var webservice: Webservice
-    private weak var viewController: EpisodesVC?
+    private weak var viewController: LocationVC?
     
-    @Published private(set) var episodes = [Episode]()
+    @Published private(set) var locations = [Location]()
     @Published private(set) var isLoading = false
     @Published private(set) var errorState: Error? = nil
     private var page = 1
     
-    init(vc: EpisodesVC) {
+    init(vc: LocationVC) {
         self.viewController = vc
     }
     
-    func getEpisodes() {
+    func getLocations() {
         Task {
             isLoading = true
             do {
-                let retrievedEpisodes = try await webservice.request(endpoint: .Episodes, responseType: APIResponse<Episode>.self)
-                episodes = retrievedEpisodes.results
+                let retrievedLocations = try await webservice.request(endpoint: .Locations, responseType: APIResponse<Location>.self)
+                locations = retrievedLocations.results
                 errorState = nil
             } catch let error {
                 errorState = error
@@ -35,4 +35,3 @@ final class EpisodesVM: ViewModel {
         }
     }
 }
-

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Basic: Decodable {
+struct Basic: Decodable, Hashable {
     let name: String
     let url: String
 }

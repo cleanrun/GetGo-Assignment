@@ -1,16 +1,15 @@
 //
-//  EpisodesVC.swift
+//  LocationVC.swift
 //  RickMorty-Assignment
 //
-//  Created by cleanmac on 17/02/23.
+//  Created by cleanmac on 19/02/23.
 //
 
 import UIKit
-import Combine
 
-final class EpisodesVC: ViewController {
-    private typealias DataSource = UITableViewDiffableDataSource<Int, Episode>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Episode>
+final class LocationVC: BaseVC {
+    private typealias DataSource = UITableViewDiffableDataSource<Int, Location>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Location>
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -19,12 +18,12 @@ final class EpisodesVC: ViewController {
         return tableView
     }()
     
-    private var viewModel: EpisodesVM!
+    private var viewModel: LocationVM!
     private var dataSource: DataSource!
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = EpisodesVM(vc: self)
+        self.viewModel = LocationVM(vc: self)
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +32,7 @@ final class EpisodesVC: ViewController {
     
     override func loadView() {
         super.loadView()
-        title = "Episode"
+        title = "Location"
         
         addSubviewAndConstraints(view: tableView, constraints: [
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -47,15 +46,15 @@ final class EpisodesVC: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getEpisodes()
+        viewModel.getLocations()
     }
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.register(EpisodeCell.self, forCellReuseIdentifier: EpisodeCell.reuseIdentifier)
+        tableView.register(LocationCell.self, forCellReuseIdentifier: LocationCell.reuseIdentifier)
         
         dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: EpisodeCell.reuseIdentifier) as! EpisodeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.reuseIdentifier) as! LocationCell
             cell.selectionStyle = .none
             cell.setContents(item)
             return cell
@@ -64,23 +63,23 @@ final class EpisodesVC: ViewController {
     }
     
     override func setupBindings() {
-        viewModel.$episodes.receive(on: DispatchQueue.main).sink { [unowned self] value in
+        viewModel.$locations.receive(on: DispatchQueue.main).sink { [unowned self] value in
             self.setupSnapshot(value)
         }.store(in: &disposables)
     }
     
-    private func setupSnapshot(_ value: [Episode]) {
+    private func setupSnapshot(_ value: [Location]) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(value, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-    
+
 }
 
-extension EpisodesVC: UITableViewDelegate {
+extension LocationVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        132
+        96
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

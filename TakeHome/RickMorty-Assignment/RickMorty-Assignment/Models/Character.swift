@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Character: Decodable {
+struct Character: Decodable, Hashable {
     let charId: Int
     let name: String
-    let status: String
+    let status: Status
     let species: String
     let type: String
-    let gender: String
+    let gender: Gender
     let origin: Basic
     let location: Basic
     let image: String
@@ -34,5 +34,9 @@ struct Character: Decodable {
         case episode
         case url
         case created
+    }
+    
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        return lhs.charId == rhs.charId
     }
 }

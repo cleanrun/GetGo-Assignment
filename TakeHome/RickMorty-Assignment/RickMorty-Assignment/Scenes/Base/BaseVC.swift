@@ -16,13 +16,23 @@ class BaseVC: UIViewController {
     
     var disposables = Set<AnyCancellable>()
     
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = .systemBackground
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
     }
     
     func setupBindings() {}
+    
+    func addSubviewAndConstraints(view: UIView, constraints: [NSLayoutConstraint]) {
+        self.view.addSubview(view)
+        NSLayoutConstraint.activate(constraints)
+    }
 }
 
 typealias ViewController = BaseVC
-typealias ViewModel = BaseVMProtocol
+typealias ViewModel = ObservableObject & BaseVMProtocol

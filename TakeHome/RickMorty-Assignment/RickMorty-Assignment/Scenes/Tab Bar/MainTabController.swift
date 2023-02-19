@@ -16,6 +16,14 @@ final class MainTabController: UITabBarController {
     
     private func setupViewControllers() {
         viewControllers = [
+            createNavController(for: CharacterVC(),
+                                title: "Character",
+                                activeIcon: ImageAsset.TAB_CHARACTER_ACTIVE,
+                                inactiveIcon: ImageAsset.TAB_CHARACTER_INACTIVE),
+            createNavController(for: LocationVC(),
+                                title: "Location",
+                                activeIcon: ImageAsset.TAB_LOCATION_ACTIVE,
+                                inactiveIcon: ImageAsset.TAB_LOCATION_INACTIVE),
             createNavController(for: EpisodesVC(),
                                 title: "Episodes",
                                 activeIcon: ImageAsset.TAB_EPISODES_ACTIVE,
