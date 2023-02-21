@@ -83,7 +83,7 @@ extension EpisodesVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        EpisodesNavigator.presentEpisodeDetailModal(using: self, for: viewModel.episodes[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
