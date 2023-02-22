@@ -19,6 +19,12 @@ final class CharacterVC: BaseVC {
         return collectionView
     }()
     
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        return searchController
+    }()
+    
     private var viewModel: CharacterVM!
     private var dataSource: DataSource!
     
@@ -34,6 +40,8 @@ final class CharacterVC: BaseVC {
     override func loadView() {
         super.loadView()
         title = "Character"
+        
+        navigationItem.searchController = searchController
         
         addSubviewAndConstraints(view: collectionView, constraints: [
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -64,6 +72,10 @@ final class CharacterVC: BaseVC {
     override func setupBindings() {
         viewModel.$characters.receive(on: DispatchQueue.main).sink { [unowned self] value in
             self.setupSnapshot(value)
+        }.store(in: &disposables)
+        
+        viewModel.$searchQuery.debounce(for: 1, scheduler: DispatchQueue.main).sink { [unowned self] _ in
+            self.viewModel.filterCharactersByQuery()
         }.store(in: &disposables)
     }
     
@@ -97,8 +109,14 @@ extension CharacterVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if viewModel.characters.count == indexPath.row + 1 {
+        if viewModel.characters.count == indexPath.row + 1 && viewModel.searchQuery == nil {
             viewModel.getCharacters()
         }
+    }
+}
+
+extension CharacterVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.setSearchQuery(searchText)
     }
 }

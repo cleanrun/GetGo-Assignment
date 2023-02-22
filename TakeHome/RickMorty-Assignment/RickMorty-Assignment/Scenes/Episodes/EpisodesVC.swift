@@ -19,6 +19,12 @@ final class EpisodesVC: ViewController {
         return tableView
     }()
     
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        return searchController
+    }()
+    
     private var viewModel: EpisodesVM!
     private var dataSource: DataSource!
     
@@ -34,6 +40,8 @@ final class EpisodesVC: ViewController {
     override func loadView() {
         super.loadView()
         title = "Episode"
+        
+        navigationItem.searchController = searchController
         
         addSubviewAndConstraints(view: tableView, constraints: [
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -66,6 +74,10 @@ final class EpisodesVC: ViewController {
         viewModel.$episodes.receive(on: DispatchQueue.main).sink { [unowned self] value in
             self.setupSnapshot(value)
         }.store(in: &disposables)
+        
+        viewModel.$searchQuery.debounce(for: 1, scheduler: DispatchQueue.main).sink { [unowned self] _ in
+            self.viewModel.filterEpisodesByQuery()
+        }.store(in: &disposables)
     }
     
     private func setupSnapshot(_ value: [Episode]) {
@@ -87,8 +99,14 @@ extension EpisodesVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if viewModel.episodes.count == indexPath.row + 1 {
+        if viewModel.episodes.count == indexPath.row + 1 && viewModel.searchQuery == nil {
             viewModel.getEpisodes()
         }
+    }
+}
+
+extension EpisodesVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.setSearchQuery(searchText)
     }
 }

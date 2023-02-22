@@ -12,9 +12,11 @@ final class CharacterVM: ViewModel {
     @Dependency(\.webservice) var webservice: Webservice
     private weak var viewController: CharacterVC?
     
+    private var allCharacters = [Character]()
     @Published private(set) var characters = [Character]()
     @Published private(set) var isLoading = false
     @Published private(set) var errorState: Error? = nil
+    @Published private(set) var searchQuery: String? = nil
     private(set) var page = 0
     
     init(vc: CharacterVC) {
@@ -29,15 +31,29 @@ final class CharacterVM: ViewModel {
             do {
                 let retrievedCharacters = try await webservice.request(endpoint: .Characters, page: page, responseType: APIResponse<Character>.self)
                 if page == 1 {
-                    characters = retrievedCharacters.results
+                    allCharacters = retrievedCharacters.results
                 } else {
-                    characters += retrievedCharacters.results
+                    allCharacters += retrievedCharacters.results
                 }
+                characters = allCharacters
                 errorState = nil
             } catch let error {
                 errorState = error
             }
             isLoading = false
+        }
+    }
+    
+    func setSearchQuery(_ query: String) {
+        searchQuery = query.isEmpty ? nil : query
+    }
+    
+    func filterCharactersByQuery() {
+        if let searchQuery {
+            let filteredLocations = allCharacters.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
+            characters = filteredLocations
+        } else {
+            characters = allCharacters
         }
     }
 }

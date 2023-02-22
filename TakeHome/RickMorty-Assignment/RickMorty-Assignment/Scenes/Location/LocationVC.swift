@@ -18,6 +18,12 @@ final class LocationVC: BaseVC {
         return tableView
     }()
     
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        return searchController
+    }()
+    
     private var viewModel: LocationVM!
     private var dataSource: DataSource!
     
@@ -33,6 +39,8 @@ final class LocationVC: BaseVC {
     override func loadView() {
         super.loadView()
         title = "Location"
+        
+        navigationItem.searchController = searchController
         
         addSubviewAndConstraints(view: tableView, constraints: [
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -69,6 +77,10 @@ final class LocationVC: BaseVC {
         viewModel.$errorState.receive(on: DispatchQueue.main).sink { value in
             print("is error nil \(value == nil)")
         }.store(in: &disposables)
+        
+        viewModel.$searchQuery.debounce(for: 1, scheduler: DispatchQueue.main).sink { [unowned self] _ in
+            self.viewModel.filterLocationsByQuery()
+        }.store(in: &disposables)
     }
     
     private func setupSnapshot(_ value: [Location]) {
@@ -89,8 +101,14 @@ extension LocationVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if viewModel.locations.count == indexPath.row + 2 {
+        if viewModel.locations.count == indexPath.row + 2 && viewModel.searchQuery == nil {
             viewModel.getLocations()
         }
+    }
+}
+
+extension LocationVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.setSearchQuery(searchText)
     }
 }
