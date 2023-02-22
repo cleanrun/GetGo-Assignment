@@ -12,7 +12,7 @@ final class CharacterDetailVM: ViewModel {
     @Dependency(\.webservice) var webservice: Webservice
     private weak var viewController: CharacterDetailVC?
     
-    @Published private(set) var character: Character?
+    @Published private(set) var character: Character
     
     init(vc: CharacterDetailVC, character: Character) {
         self.viewController = vc

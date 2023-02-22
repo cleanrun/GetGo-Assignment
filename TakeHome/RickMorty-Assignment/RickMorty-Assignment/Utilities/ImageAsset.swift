@@ -19,6 +19,6 @@ struct ImageAsset {
     static let IC_DEAD = "ic_dead"
     static let IC_FEMALE = "ic_female"
     static let IC_MALE = "ic_male"
-    static let IC_NON_BINARY = "ic_non_binary"
+    static let IC_GENDERLESS = "ic_genderless"
     static let IC_UNKNOWN = "ic_unknown"
 }

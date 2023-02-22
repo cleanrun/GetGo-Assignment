@@ -39,6 +39,7 @@ final class CharacterVC: BaseVC {
 
     override func loadView() {
         super.loadView()
+        navigationController?.navigationBar.prefersLargeTitles = true
         title = "Character"
         
         navigationItem.searchController = searchController
@@ -89,7 +90,7 @@ final class CharacterVC: BaseVC {
 
 extension CharacterVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        CharacterNavigator.routeToCharacterDetail(using: self, for: viewModel.characters[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
