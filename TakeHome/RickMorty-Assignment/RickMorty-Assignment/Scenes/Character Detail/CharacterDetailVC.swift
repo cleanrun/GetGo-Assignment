@@ -174,7 +174,7 @@ final class CharacterDetailVC: BaseVC {
         
         let createdAttributedString = NSMutableAttributedString(string: "Created\n",
                                                                 attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)])
-        createdAttributedString.append(NSAttributedString(string: character.created,
+        createdAttributedString.append(NSAttributedString(string: character.created.getDateWithFormat(using: .created),
                                                           attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .regular)]))
         characterCreatedLabel.attributedText = createdAttributedString
         

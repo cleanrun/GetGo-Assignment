@@ -36,6 +36,7 @@ class EpisodeDetailVC: BaseVC {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textAlignment = .right
         return label
     }()
     
@@ -100,7 +101,6 @@ class EpisodeDetailVC: BaseVC {
     }
     
     private func setupContents(_ episode: Episode) {
-        let charactersString = episode.characters.joined(separator: "\n")
         var season = "\(episode.episode[1])\(episode.episode[2])"
         var episodeNumber = "\(episode.episode[4])\(episode.episode[5])"
         
@@ -113,10 +113,29 @@ class EpisodeDetailVC: BaseVC {
         }
 
         episodeNameLabel.text = episode.name
-        episodeCreatedLabel.text = "Created\n\(episode.created)"
-        episodeAirDateLabel.text = "AirDate: \(episode.airDate)"
+        
+        let createdAttributedString = NSMutableAttributedString(string: "Created\n",
+                                                                attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)])
+        createdAttributedString.append(NSAttributedString(string: episode.created.getDateWithFormat(using: .created),
+                                                          attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .regular)]))
+        episodeCreatedLabel.attributedText = createdAttributedString
+        
+        let airDateAttributedString = NSMutableAttributedString(string: "Air Date: ",
+                                                                attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .semibold)])
+        airDateAttributedString.append(NSAttributedString(string: episode.airDate.getDateWithFormat(using: .airDate),
+                                                          attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        episodeAirDateLabel.attributedText = airDateAttributedString
+        
         episodeSeasonAndEpisodeLabel.text = "Season: \(season)\nEpisode: \(episodeNumber)"
-        episodeCharactersLabel.text = "Characters:\n\(charactersString)"
+        
+        let charactersString = episode.characters.joined(separator: "\n")
+        let charactersAttributedString = NSMutableAttributedString(string: "Characters:\n",
+                                                                  attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .semibold)])
+        charactersAttributedString.append(NSAttributedString(string: charactersString,
+                                                            attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .regular)]))
+        
+        
+        episodeCharactersLabel.attributedText = charactersAttributedString
     }
     
     override func setupBindings() {

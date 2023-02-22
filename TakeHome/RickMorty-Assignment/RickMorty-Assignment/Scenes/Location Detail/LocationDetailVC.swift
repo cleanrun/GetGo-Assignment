@@ -35,6 +35,7 @@ final class LocationDetailVC: BaseVC {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.textAlignment = .right
         return label
     }()
     
@@ -99,13 +100,24 @@ final class LocationDetailVC: BaseVC {
     }
     
     private func setupContents(_ location: Location) {
-        let residentsString = location.residents.joined(separator: "\n")
-        
         locationNameLabel.text = location.name
-        locationCreatedLabel.text = "Created\n\(location.created)"
+        
+        let createdAttributedString = NSMutableAttributedString(string: "Created\n",
+                                                                attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)])
+        createdAttributedString.append(NSAttributedString(string: location.created.getDateWithFormat(using: .created),
+                                                          attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .regular)]))
+        locationCreatedLabel.attributedText = createdAttributedString
+        
         locationTypeLabel.text = "Type: \(location.type)"
         locationDimensionLabel.text = "Dimension:\n\(location.dimension)"
-        locationResidentsLabel.text = "Residents:\n\(residentsString)"
+        
+        let residentsString = location.residents.joined(separator: "\n")
+        let residentsAttributedString = NSMutableAttributedString(string: "Residents:\n",
+                                                                  attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .semibold)])
+        residentsAttributedString.append(NSAttributedString(string: residentsString,
+                                                            attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .regular)]))
+        
+        locationResidentsLabel.attributedText = residentsAttributedString
     }
     
     override func setupBindings() {

@@ -43,6 +43,10 @@ final class CharacterVC: BaseVC {
         title = "Character"
         
         navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(filterAction))
         
         addSubviewAndConstraints(view: collectionView, constraints: [
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -85,6 +89,10 @@ final class CharacterVC: BaseVC {
         snapshot.appendSections([0])
         snapshot.appendItems(value, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    @objc private func filterAction() {
+        // FIXME: Implement this soon
     }
 }
 

@@ -45,3 +45,38 @@ extension BidirectionalCollection {
         return self[i]
     }
 }
+
+extension String {
+    enum StringDateFormat {
+        case created
+        case airDate
+        
+        var beforeFormat: String {
+            switch self {
+            case .created:
+                return "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            case .airDate:
+                return "MMMM dd, yyyy"
+            }
+        }
+        
+        var afterFormat: String {
+            switch self {
+            case .created:
+                return "HH:mm, d MMMM yyyy"
+            case .airDate:
+                return "d MMMM yyyy"
+            }
+        }
+    }
+    
+    func getDateWithFormat(using format: StringDateFormat) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format.beforeFormat
+        
+        guard let date = dateFormatter.date(from: self) else { fatalError("Wrong date format") }
+        
+        dateFormatter.dateFormat = format.afterFormat
+        return dateFormatter.string(from: date)
+    }
+}
