@@ -91,8 +91,14 @@ final class CharacterVC: BaseVC {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
+    private func deleteAllItemsFromSnapshot() {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
     @objc private func filterAction() {
-        // FIXME: Implement this soon
+        CharacterNavigator.presentFilterModal(using: self)
     }
 }
 

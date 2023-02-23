@@ -47,6 +47,14 @@
 		AB89F426299FD3CE00E32046 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89F425299FD3CE00E32046 /* ImageAsset.swift */; };
 		AB89F428299FD5CC00E32046 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89F427299FD5CC00E32046 /* UIImage+Extension.swift */; };
 		AB9E378329A25280001D44DF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9E378229A25280001D44DF /* String+Extension.swift */; };
+		ABCF5AFD29A7A0370077217B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCF5AFC29A7A0370077217B /* Filter.swift */; };
+		ABCF5AFF29A7A9B80077217B /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCF5AFE29A7A9B80077217B /* UICollectionView+Extension.swift */; };
+		ABCFEB9B29A7507400FF144A /* FilterModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEB9A29A7507400FF144A /* FilterModalVC.swift */; };
+		ABCFEB9D29A7508000FF144A /* FilterModalVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEB9C29A7508000FF144A /* FilterModalVM.swift */; };
+		ABCFEB9F29A752F700FF144A /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEB9E29A752F700FF144A /* FilterCell.swift */; };
+		ABCFEBA129A757FE00FF144A /* FilterModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEBA029A757FE00FF144A /* FilterModalPresentationController.swift */; };
+		ABCFEBA329A7582900FF144A /* FilterModalTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEBA229A7582900FF144A /* FilterModalTransitionDelegate.swift */; };
+		ABCFEBA529A77C0300FF144A /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCFEBA429A77C0300FF144A /* FilterHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +111,14 @@
 		AB89F425299FD3CE00E32046 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		AB89F427299FD5CC00E32046 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		AB9E378229A25280001D44DF /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		ABCF5AFC29A7A0370077217B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		ABCF5AFE29A7A9B80077217B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		ABCFEB9A29A7507400FF144A /* FilterModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalVC.swift; sourceTree = "<group>"; };
+		ABCFEB9C29A7508000FF144A /* FilterModalVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalVM.swift; sourceTree = "<group>"; };
+		ABCFEB9E29A752F700FF144A /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		ABCFEBA029A757FE00FF144A /* FilterModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalPresentationController.swift; sourceTree = "<group>"; };
+		ABCFEBA229A7582900FF144A /* FilterModalTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalTransitionDelegate.swift; sourceTree = "<group>"; };
+		ABCFEBA429A77C0300FF144A /* FilterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +216,7 @@
 				AB89F41B299FC57B00E32046 /* Location.swift */,
 				AB89F41D299FC59000E32046 /* APIResponse.swift */,
 				AB780CD829A1DC0F00487D1A /* ModelEnums.swift */,
+				ABCF5AFC29A7A0370077217B /* Filter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,10 +282,11 @@
 		AB89F406299FB46000E32046 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AB780CDA29A1EC9B00487D1A /* UIColor+Extension.swift */,
 				AB89F427299FD5CC00E32046 /* UIImage+Extension.swift */,
 				AB780CD429A1D45200487D1A /* UIView+Extension.swift */,
 				AB780CD629A1D82700487D1A /* UIStackView+Extension.swift */,
-				AB780CDA29A1EC9B00487D1A /* UIColor+Extension.swift */,
+				ABCF5AFE29A7A9B80077217B /* UICollectionView+Extension.swift */,
 				AB9E378229A25280001D44DF /* String+Extension.swift */,
 			);
 			path = Extensions;
@@ -312,6 +330,12 @@
 		AB89F411299FB59100E32046 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				ABCFEB9A29A7507400FF144A /* FilterModalVC.swift */,
+				ABCFEB9C29A7508000FF144A /* FilterModalVM.swift */,
+				ABCFEB9E29A752F700FF144A /* FilterCell.swift */,
+				ABCFEBA429A77C0300FF144A /* FilterHeaderView.swift */,
+				ABCFEBA229A7582900FF144A /* FilterModalTransitionDelegate.swift */,
+				ABCFEBA029A757FE00FF144A /* FilterModalPresentationController.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -435,15 +459,20 @@
 				AB4E678529A4730800A8A140 /* LocationDetailVM.swift in Sources */,
 				AB780CD529A1D45200487D1A /* UIView+Extension.swift in Sources */,
 				AB89F426299FD3CE00E32046 /* ImageAsset.swift in Sources */,
+				ABCFEBA329A7582900FF144A /* FilterModalTransitionDelegate.swift in Sources */,
 				AB780CDD29A1EE4000487D1A /* LocationCell.swift in Sources */,
 				AB89F3EE299FA88D00E32046 /* MainTabController.swift in Sources */,
 				AB780CC929A1C43900487D1A /* CharacterVC.swift in Sources */,
 				AB46571529A663D9007B9226 /* CharacterNavigator.swift in Sources */,
 				AB780CD929A1DC0F00487D1A /* ModelEnums.swift in Sources */,
 				AB89F422299FCFB400E32046 /* EpisodesVC.swift in Sources */,
+				ABCFEB9F29A752F700FF144A /* FilterCell.swift in Sources */,
 				AB89F3EA299FA88D00E32046 /* AppDelegate.swift in Sources */,
+				ABCFEBA529A77C0300FF144A /* FilterHeaderView.swift in Sources */,
+				ABCF5AFD29A7A0370077217B /* Filter.swift in Sources */,
 				AB9E378329A25280001D44DF /* String+Extension.swift in Sources */,
 				AB4E678729A47F6700A8A140 /* LocationNavigator.swift in Sources */,
+				ABCFEB9B29A7507400FF144A /* FilterModalVC.swift in Sources */,
 				AB89F41E299FC59000E32046 /* APIResponse.swift in Sources */,
 				AB89F41C299FC57B00E32046 /* Location.swift in Sources */,
 				AB4E678D29A4815800A8A140 /* EpisodeDetailVC.swift in Sources */,
@@ -454,6 +483,7 @@
 				AB780CCF29A1C47F00487D1A /* LocationVM.swift in Sources */,
 				AB89F3EC299FA88D00E32046 /* SceneDelegate.swift in Sources */,
 				AB780CCB29A1C44300487D1A /* CharacterVM.swift in Sources */,
+				ABCFEBA129A757FE00FF144A /* FilterModalPresentationController.swift in Sources */,
 				AB89F424299FCFBE00E32046 /* EpisodesVM.swift in Sources */,
 				AB780CD329A1D29100487D1A /* ReusableView.swift in Sources */,
 				AB780CDF29A2002800487D1A /* EpisodeCell.swift in Sources */,
@@ -462,11 +492,13 @@
 				AB4E678129A46CFD00A8A140 /* CharacterDetailVM.swift in Sources */,
 				AB89F420299FC72700E32046 /* Basic.swift in Sources */,
 				AB780CD129A1D11D00487D1A /* CharacterCell.swift in Sources */,
+				ABCF5AFF29A7A9B80077217B /* UICollectionView+Extension.swift in Sources */,
 				AB4E677F29A46CF300A8A140 /* CharacterDetailVC.swift in Sources */,
 				AB89F40B299FB4A000E32046 /* BaseVC.swift in Sources */,
 				AB89F428299FD5CC00E32046 /* UIImage+Extension.swift in Sources */,
 				AB89F41A299FC56000E32046 /* Episode.swift in Sources */,
 				AB780CD729A1D82700487D1A /* UIStackView+Extension.swift in Sources */,
+				ABCFEB9D29A7508000FF144A /* FilterModalVM.swift in Sources */,
 				AB4E678F29A4816400A8A140 /* EpisodeDetailVM.swift in Sources */,
 				AB89F418299FC55900E32046 /* Character.swift in Sources */,
 			);

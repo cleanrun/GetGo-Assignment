@@ -17,10 +17,16 @@ final class CharacterVM: ViewModel {
     @Published private(set) var isLoading = false
     @Published private(set) var errorState: Error? = nil
     @Published private(set) var searchQuery: String? = nil
+    private var filters: [Filter]? = nil
     private(set) var page = 0
     
     init(vc: CharacterVC) {
         self.viewController = vc
+        NotificationCenter.default.addObserver(self, selector: #selector(applyFilter(_:)), name: kPostFilterNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: kPostFilterNotification, object: nil)
     }
     
     func getCharacters() {
@@ -29,7 +35,7 @@ final class CharacterVM: ViewModel {
         Task {
             isLoading = true
             do {
-                let retrievedCharacters = try await webservice.request(endpoint: .Characters, page: page, responseType: APIResponse<Character>.self)
+                let retrievedCharacters = try await webservice.request(endpoint: .Characters, page: page, filter: filters, responseType: APIResponse<Character>.self)
                 if page == 1 {
                     allCharacters = retrievedCharacters.results
                 } else {
@@ -55,5 +61,14 @@ final class CharacterVM: ViewModel {
         } else {
             characters = allCharacters
         }
+    }
+    
+    @objc func applyFilter(_ notification: Notification) {
+        filters = notification.object as? [Filter]
+        allCharacters.removeAll()
+        characters.removeAll()
+        page = 0
+        errorState = nil
+        getCharacters()
     }
 }
