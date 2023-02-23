@@ -36,11 +36,12 @@ final class FilterModalVC: BaseVC {
     }()
     
     private var filterCollectionView: UICollectionView = {
-        var layout = UICollectionViewFlowLayout()
+        var layout = LeftAlignedCollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = true
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -184,10 +185,6 @@ extension FilterModalVC: UICollectionViewDelegateFlowLayout {
         }()
         
         return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -33,7 +33,8 @@ extension Filter {
         [
             Filter(type: .species, title: "Alien", query: "alien"),
             Filter(type: .species, title: "Animal", query: "animal"),
-            Filter(type: .species, title: "Mythological Creature", query: ""),
+            // FIXME: There's no documentation regarding this query
+            Filter(type: .species, title: "Mythological Creature", query: "idontknowwhatthequeryis"),
             Filter(type: .species, title: "Human", query: "human"),
         ]
     }

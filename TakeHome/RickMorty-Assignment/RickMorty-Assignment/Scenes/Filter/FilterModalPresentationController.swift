@@ -13,7 +13,8 @@ enum ModalScaleState {
 }
 
 final class FilterModalPresentationController: UIPresentationController {
-    private let presentationHeight: CGFloat = UIScreen.main.bounds.height / 2
+    private let presentationHeight: CGFloat = UIScreen.main.bounds.height * 0.7
+    private let presentationViewOffset: CGFloat = UIScreen.main.bounds.height * 0.3
     private var direction: CGFloat = 0
     private var state: ModalScaleState = .interaction
     private lazy var dimmingView: UIView! = {
@@ -28,9 +29,9 @@ final class FilterModalPresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let containerView else { return .zero }
         return CGRect(x: 0,
-                      y: presentationHeight,
+                      y: presentationViewOffset,
                       width: containerView.bounds.width,
-                      height: containerView.bounds.height - presentationHeight)
+                      height: containerView.bounds.height - presentationViewOffset)
     }
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
@@ -58,13 +59,13 @@ final class FilterModalPresentationController: UIPresentationController {
             guard location.y > 0 else { return }
             switch state {
             case .presentation:
-                presentedView.frame.origin.y = location.y + presentationHeight
+                presentedView.frame.origin.y = location.y + presentationViewOffset
             case .interaction:
-                presentedView.frame.origin.y = location.y + presentationHeight
+                presentedView.frame.origin.y = location.y + presentationViewOffset
             }
             direction = velocity.y
         case .ended:
-            let maxPresentedY = containerView.frame.height - presentationHeight
+            let maxPresentedY = containerView.frame.height - (presentationViewOffset * 2)
             switch presentedView.frame.origin.y {
             case 0...maxPresentedY:
                 changeScale(to: .interaction)
