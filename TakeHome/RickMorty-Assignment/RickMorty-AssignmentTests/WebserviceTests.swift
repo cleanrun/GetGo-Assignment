@@ -24,9 +24,15 @@ final class WebserviceTests: XCTestCase {
         XCTAssertNotNil(result)
     }
     
+    func testFilterSuccess() async throws {
+        let filter = [Filter(type: .status, title: "Alive", query: "alive")]
+        let result = try await webservice.request(endpoint: .Characters, filter: filter, responseType: APIResponse<Character>.self)
+        
+        XCTAssertNotNil(result)
+    }
+    
     func testPageError() async throws {
         let maximumPage = try await webservice.request(endpoint: .Characters, responseType: APIResponse<Character>.self).info.pages
-        
         let result = try? await webservice.request(endpoint: .Characters, page: maximumPage, responseType: APIResponse<Character>.self)
         
         XCTAssertNil(result)
@@ -37,6 +43,18 @@ final class WebserviceTests: XCTestCase {
         
         do {
             let result = try await webservice.request(endpoint: .Characters, responseType: APIResponse<Location>.self)
+            XCTAssertNil(result)
+        } catch {
+            let castedError = error as! WebserviceError
+            XCTAssertEqual(castedError, WebserviceError.responseError)
+        }
+    }
+    
+    func testFilterError() async {
+        let filter = [Filter(type: .status, title: "Unknown", query: "Unknown"), Filter(type: .gender, title: "Unknown", query: "Unknown")]
+        
+        do {
+            let result = try await webservice.request(endpoint: .Characters, filter: filter, responseType: APIResponse<Character>.self)
             XCTAssertNil(result)
         } catch {
             let castedError = error as! WebserviceError
