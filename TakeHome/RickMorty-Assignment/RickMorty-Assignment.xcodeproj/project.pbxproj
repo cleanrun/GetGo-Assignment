@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB01177729AA337E00690FB9 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01177629AA337E00690FB9 /* ImageDownloadOperation.swift */; };
+		AB01177929AA356700690FB9 /* AsyncImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01177829AA356700690FB9 /* AsyncImageDownloader.swift */; };
 		AB46571529A663D9007B9226 /* CharacterNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB46571429A663D9007B9226 /* CharacterNavigator.swift */; };
 		AB4E677F29A46CF300A8A140 /* CharacterDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E677E29A46CF300A8A140 /* CharacterDetailVC.swift */; };
 		AB4E678129A46CFD00A8A140 /* CharacterDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4E678029A46CFD00A8A140 /* CharacterDetailVM.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB01177629AA337E00690FB9 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
+		AB01177829AA356700690FB9 /* AsyncImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageDownloader.swift; sourceTree = "<group>"; };
 		AB46571429A663D9007B9226 /* CharacterNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNavigator.swift; sourceTree = "<group>"; };
 		AB4E677E29A46CF300A8A140 /* CharacterDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailVC.swift; sourceTree = "<group>"; };
 		AB4E678029A46CFD00A8A140 /* CharacterDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailVM.swift; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB01177529AA334C00690FB9 /* Image Download */ = {
+			isa = PBXGroup;
+			children = (
+				AB01177629AA337E00690FB9 /* ImageDownloadOperation.swift */,
+				AB01177829AA356700690FB9 /* AsyncImageDownloader.swift */,
+			);
+			path = "Image Download";
+			sourceTree = "<group>";
+		};
 		AB57194129A3CB6900A4B090 /* RickMorty-AssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +211,7 @@
 		AB89F3FE299FAB3200E32046 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AB01177529AA334C00690FB9 /* Image Download */,
 				AB89F414299FB81400E32046 /* Dependency Injection */,
 				AB89F406299FB46000E32046 /* Extensions */,
 				AB89F407299FB46700E32046 /* Webservice */,
@@ -489,12 +503,14 @@
 				AB780CCB29A1C44300487D1A /* CharacterVM.swift in Sources */,
 				ABCFEBA129A757FE00FF144A /* FilterModalPresentationController.swift in Sources */,
 				AB89F424299FCFBE00E32046 /* EpisodesVM.swift in Sources */,
+				AB01177729AA337E00690FB9 /* ImageDownloadOperation.swift in Sources */,
 				AB780CD329A1D29100487D1A /* ReusableView.swift in Sources */,
 				AB780CDF29A2002800487D1A /* EpisodeCell.swift in Sources */,
 				AB780CCD29A1C47400487D1A /* LocationVC.swift in Sources */,
 				AB89F416299FB85A00E32046 /* DependencyInjection.swift in Sources */,
 				AB4E678129A46CFD00A8A140 /* CharacterDetailVM.swift in Sources */,
 				AB89F420299FC72700E32046 /* Basic.swift in Sources */,
+				AB01177929AA356700690FB9 /* AsyncImageDownloader.swift in Sources */,
 				AB780CD129A1D11D00487D1A /* CharacterCell.swift in Sources */,
 				ABCF5AFF29A7A9B80077217B /* UICollectionView+Extension.swift in Sources */,
 				AB4E677F29A46CF300A8A140 /* CharacterDetailVC.swift in Sources */,

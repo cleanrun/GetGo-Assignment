@@ -46,6 +46,8 @@ final class CharacterCell: UICollectionViewCell, ReusableView {
         return label
     }()
     
+    private(set) var representedID: UUID?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -85,20 +87,14 @@ final class CharacterCell: UICollectionViewCell, ReusableView {
     }
     
     func setContents(_ character: Character) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            if let url = URL(string: character.image) {
-                if let data = try? Data(contentsOf: url) {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async { [weak self] in
-                        self?.characterImageView.image = image
-                    }
-                }
-            }
-        }
-        
+        representedID = character.id
         characterNameLabel.text = character.name
         characterTypeLabel.text = character.species
         characterInfoView.backgroundColor = UIColor(hex: character.species == "Human" ? "#EDEDED" : "#D3FF22")
+    }
+    
+    func updateImage(_ image: UIImage?) {
+        characterImageView.image = image
     }
     
 }

@@ -27,6 +27,7 @@ final class CharacterVC: BaseVC {
     
     private var viewModel: CharacterVM!
     private var dataSource: DataSource!
+    private let imageDownloader = AsyncImageDownloader()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -65,11 +66,26 @@ final class CharacterVC: BaseVC {
     
     private func setupCollectionView() {
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifier)
         
-        dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = DataSource(collectionView: collectionView) { [unowned self] collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as! CharacterCell
             cell.setContents(item)
+            
+            if let downloadedImage = self.imageDownloader.downloadedImage(for: item.id) {
+                cell.updateImage(downloadedImage)
+                return cell
+            }
+            
+            cell.updateImage(nil)
+            self.imageDownloader.downloadAsync(item.id, imageURLString: item.image) { image in
+                DispatchQueue.main.async {
+                    guard cell.representedID == item.id else { return }
+                    cell.updateImage(image)
+                }
+            }
+            
             return cell
         }
     }
@@ -126,6 +142,22 @@ extension CharacterVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if viewModel.characters.count == indexPath.row + 1 && viewModel.searchQuery == nil {
             viewModel.getCharacters()
+        }
+    }
+}
+
+extension CharacterVC: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let item = viewModel.characters[indexPath.row]
+            imageDownloader.downloadAsync(item.id, imageURLString: item.image)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let item = viewModel.characters[indexPath.row]
+            imageDownloader.cancelDownload(item.id)
         }
     }
 }
